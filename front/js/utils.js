@@ -10,6 +10,8 @@ const getToken = () => {
 
 const checkAuthorization = () => getToken() ? null : window.location.href = `${baseLocalUrl}`;
 
+const clearCookies = () => document.cookie.split(";").forEach(cookie => document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 GMT"));
+
 const closeModal = () => document.querySelector(".modal").style.display = "none";
 const openModal = () => {
     document.querySelector(".modal").style.display = "flex";
@@ -44,6 +46,7 @@ const buildDefaultOption = text => {
 export {
     getToken,
     checkAuthorization,
+    clearCookies,
     closeModal,
     openModal,
     buildButton,

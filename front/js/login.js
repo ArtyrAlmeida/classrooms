@@ -1,6 +1,7 @@
 import { baseLocalUrl } from "./constants.js";
 import { getAndValidateForm } from "./forms.js";
 import { login as fetchLogin } from "./requests.js";
+import { clearCookies } from "./utils.js";
 
 const login = async () => {
     const data = getAndValidateForm();
@@ -17,4 +18,4 @@ const login = async () => {
 }
 
 document.querySelector("#login-button").addEventListener("click", login);
-document.cookie.split(";").forEach(function(cookie) { document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+clearCookies();

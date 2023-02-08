@@ -43,6 +43,12 @@ const buildDefaultOption = text => {
     return defaultOption;
 }
 
+const getBaseUrl = () => {
+    const origin = window.location.origin  + "/";
+    const pathname = window.location.pathname.split("/").find(string => !!string && !string.includes("index.html") && !string.includes("front"));
+    return origin + (pathname ? pathname + "/" : ""); 
+}
+
 export {
     getToken,
     checkAuthorization,
@@ -51,5 +57,6 @@ export {
     openModal,
     buildButton,
     buildOption,
-    buildDefaultOption
+    buildDefaultOption,
+    getBaseUrl
 };

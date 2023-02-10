@@ -1,10 +1,10 @@
 import Student from "../src/models/studentModel"
 import mongoose from "mongoose"
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 dotenv.config()
 
 
-describe('Testes de validação do banco de dados', () => {
+describe('Testes de validação de estudante do banco de dados', () => {
 
     beforeAll(async ()=> {
        await mongoose.connect(process.env.TEST_URI).catch(error => console.log(error));
@@ -51,6 +51,44 @@ describe('Testes de validação do banco de dados', () => {
            await dummyStudent2.save()
         } catch (error) {
             expect(error).toBeDefined()
+        }
+    })
+
+    test('Deve falhar ao tentar criar estudante com a mesma matrícula', async () => {
+        const dummyStudent1 = new Student({
+            name: 'nome',
+            registration: '123456789',
+            email: 'email@gmail.com',
+            phoneNumber: '83993740785'
+        })
+
+        const dummyStudent2 = new Student({
+            name: 'nome',
+            registration: '123456789',
+            email: 'email2@gmail.com',
+            phoneNumber: '83993740785'
+        })
+
+            await dummyStudent1.save()
+        try {
+           await dummyStudent2.save()
+        } catch (error) {
+            expect(error).toBeDefined()
+        }
+    })
+
+    test('Deve falhar ao tentar criar estudante com tipo de atributo errado', async () => {
+        const dummyStudent = new Student({
+            name: 'nome',
+            registration: 123,
+            email: 'email@gmail.com',
+            phoneNumber: '83993740785'
+        })
+
+        try {
+            await dummyStudent.save();
+        } catch (error) {
+            expect(error).toBeDefined();
         }
     })
 

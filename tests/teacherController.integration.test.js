@@ -5,7 +5,7 @@ import request from "supertest";
 
 
 describe('Testes de integração do controller de professores', () => {
-    jest.setTimeout(20000)
+    jest.setTimeout(5000)
 
     it('Deve obter todos os professores', async () => {
         const response = await request(app).get('/api/teacher').send();

@@ -87,4 +87,72 @@ describe("validation functions tests", () => {
 
         expect(response).toBeTruthy();
     });
+
+
+    /* EMAIL */
+    it("should return false when the email field is empty", async () => {
+        const data = {email: "   "};
+        const response = validationFunctions["email"](data);
+
+        expect(response).toBeFalsy();
+    });
+    
+    it("should return false when the email hasn't an @", async () => {
+        const data = {email: "email.com"};
+        const response = validationFunctions["email"](data);
+
+        expect(response).toBeFalsy();
+    });
+
+    it("should return false when the email hasn't a .", async () => {
+        const data = {email: "email@com"};
+        const response = validationFunctions["email"](data);
+
+        expect(response).toBeFalsy();
+    });
+
+    it("shoud return true when the email has an @ and .", async () => {
+        const data = {email: "email@email.com"};
+        const response = validationFunctions["email"](data);
+        
+        expect (response).toBeTruthy();
+    });
+    /* PHONE NUMBER */
+    it("should return false when the phone number hasn't 11 numbers", async () => {
+        const data = {phoneNumber: "1234567891"};
+        const response = validationFunctions["phoneNumber"](data);
+
+        expect(response).toBeFalsy();
+    });
+
+    it("should return true when the number has 11 numbers", async () => {
+        const data = {phoneNumber: "12345678901"};
+        const response = validationFunctions["phoneNumber"](data);
+
+        expect(response).toBeTruthy();
+    });
+
+    it("should return true when the number has 11 numbers and it's formatted", async () => {
+        const data = {phoneNumber: "(12) 34567-8901"};
+        const response = validationFunctions["phoneNumber"](data);
+
+        expect(response).toBeTruthy();
+    });
+
+
+    /* SEMESTER */
+    it("should return false when semester is invalid", async () => {
+        const data = {semester: 0};
+        const response = validationFunctions["semester"](data);
+
+        expect(response).toBeFalsy();
+    });
+
+    it("should return true when semester is at least 1", async () => {
+        const data = {semester: 1};
+        const response = validationFunctions["semester"](data);
+
+        expect(response).toBeTruthy();
+    });
 });
+ 

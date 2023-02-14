@@ -16,7 +16,7 @@ export default async function getStudentAndTeacher (classroom) {
     if (!teacherData) teacherData = {};
     
     const updatedClassroom = { ...(classroom['_doc']), teacher: teacherData, students: studentsInfo, }
-    console.log(updatedClassroom);
+
     
     return updatedClassroom;
 }

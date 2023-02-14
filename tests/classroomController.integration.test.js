@@ -25,7 +25,6 @@ describe("classroom controller tests", () => {
             authorization = adminResponse.body.token;
         }
 
-        console.log(authorization);
 
         if (teachers.body.length < 1){
             const teacher = {

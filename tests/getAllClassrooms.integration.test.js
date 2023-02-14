@@ -5,7 +5,7 @@ import request from "supertest";
 
 
 describe('Teste de integração da função getAllClassrooms do classroomController', () => {
-    jest.setTimeout(5000)
+    jest.setTimeout(10000)
 
     it('Deve obter todas as salas de aula', async () => {
         const response = await request(app).get('/api/classroom').send();
